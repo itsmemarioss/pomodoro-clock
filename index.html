@@ -31,20 +31,45 @@
 	<meta name="generator" content="Geany 1.23.1" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<style>
-		
+		p {
+			text-align: center;
+			font-size: 60px;
+		}
 	</style>
 </head>
 
 <body>
-	<div id="main">
-	
-		
-	</div>
 
-	<script type="text/javascript">
 
-		
+	<p id="demo"></p>
+
+	<script>
+
+	var pomodoro = new Date("Jan 1, 2018 00:00:10");
+	//countDownDate.setMinutes(15);
+	//countDownDate.setSeconds(00);
+
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+
+
+	// Find the distance between now an the count down date
+  	var distance = pomodoro - new Date("Jan 1, 2018 00:00:00");
+
+	    // Output the result in an element with id="demo"
+	    document.getElementById("demo").innerHTML = pomodoro.toLocaleTimeString();
+	    
+	    pomodoro.setMilliseconds(pomodoro.getMilliseconds() - 1000);
+	    
+	    
+	    if (distance < 0) {
+		clearInterval(x);
+		document.getElementById("demo").innerHTML = "EXPIRED";
+	    }
+	}, 1000);
 	</script>
+
+
 
 </body>
 
