@@ -29,6 +29,8 @@
 	<title>Pomodoro Clock</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 1.23.1" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<style>
 		p {
@@ -41,7 +43,43 @@
 <body>
 
 
-	<p id="demo"></p>
+	<div class="container">
+		<div class="row text-center">
+			
+			<div class="col-lg-offset-3 col-lg-4">
+				
+			    <div class="input-group form-group">	
+			    	<span class="input-group-btn">
+				    	<button class="btn btn-secondary" type="button">-</button>
+				    </span>
+				    <input type="text" id="break" class="form-control" value="5">
+				    <span class="input-group-btn">
+				    	<button class="btn btn-secondary" type="button">+</button>
+				    </span>
+				</div>
+				
+				<div class="input-group form-group">
+			    	<span class="input-group-btn">
+				    	<button class="btn btn-secondary" type="button">-</button>
+				    </span>
+				    <input type="text" class="form-control" value="25">
+				    <span class="input-group-btn">
+				    	<button class="btn btn-secondary" type="button">+</button>
+				    </span>
+				</div>
+				<button type="button" class="btn btn-block btn-success">Start</button>
+			</div>
+
+				
+			
+			<div class="col-8">
+				
+				<p id="demo"></p>
+			</div>
+			
+		</div>
+	</div>
+	
 
 	<script>
 
