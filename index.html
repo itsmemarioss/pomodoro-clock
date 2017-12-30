@@ -50,7 +50,11 @@
 </head>
 
 <body>
-
+	<audio id="myAudio">
+		
+		<source src="http://soundbible.com/grab.php?id=787&type=mp3" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
 
 	<div class="container">
 		<div class="text-center">
@@ -135,6 +139,8 @@
 	    		clearInterval(idTime);
 				document.getElementById("demo").innerHTML = "EXPIRED";
 				isPomodoroTime = true;
+				alert("Times up!!!");
+				document.getElementById("myAudio").play();
 
 	    	}else{
 	    		isBreakTime = true;
