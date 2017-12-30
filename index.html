@@ -33,7 +33,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 	<style>
 		p {
 			text-align: center;
@@ -45,6 +45,12 @@
 			font-family: 'Indie Flower', cursive;
 			color: red;
 			font-size: 50px;
+		}
+
+		#by {
+			margin-top: 15px;
+			font-family: 'Indie Flower', cursive;
+			text-align: center;
 		}
 	</style>
 </head>
@@ -68,7 +74,7 @@
 			    	<span class="input-group-btn">
 				    	<button id="btn-minus-break" class="btn btn-secondary" type="button">-</button>
 				    </span>
-				    <input type="text" id="break" class="form-control" value="5">
+				    <input type="text" id="break" class="form-control" value="5" data-toggle="tooltip" data-placement="right" title="Break time">
 				    <span class="input-group-btn">
 				    	<button id="btn-plus-break" class="btn btn-secondary" type="button">+</button>
 				    </span>
@@ -78,7 +84,7 @@
 			    	<span class="input-group-btn">
 				    	<button id="btn-minus-pomodoro" class="btn btn-secondary" type="button">-</button>
 				    </span>
-				    <input id="pomodoro" type="text" class="form-control" value="20">
+				    <input id="pomodoro" type="text" class="form-control" value="20" data-toggle="tooltip" data-placement="right" title="Pomodoro time">
 				    <span class="input-group-btn">
 				    	<button id="btn-plus-pomodoro" class="btn btn-secondary" type="button">+</button>
 				    </span>
@@ -92,10 +98,15 @@
 				
 				<p id="demo"></p>
 			</div>
+
+			<div id="by"> by <a href="https://github.com/sharpmario" target="_blank" > Mário S. Sousa</a></div>
 			
 		</div>
 	</div>
 	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
 	<script>
 
@@ -181,6 +192,8 @@
 		$("#start").click(function(){
 			resetClock($("#pomodoro").val());
 		});
+
+		$('[data-toggle="tooltip"]').tooltip();
 
 	});
 	</script>
