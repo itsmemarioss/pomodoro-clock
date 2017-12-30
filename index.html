@@ -31,11 +31,20 @@
 	<meta name="generator" content="Geany 1.23.1" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<style>
 		p {
 			text-align: center;
 			font-size: 60px;
+		}
+
+		h4{
+			
+			font-family: 'Indie Flower', cursive;
+			color: red;
+			font-size: 50px;
 		}
 	</style>
 </head>
@@ -44,35 +53,38 @@
 
 
 	<div class="container">
-		<div class="row text-center">
+		<div class="text-center">
 			
-			<div class="col-lg-offset-3 col-lg-4">
+			<div class="d-block mx-auto col-6" style="margin-top: 10px;">
+			<!-- class="col-lg-offset-3 col-lg-4" -->
+				<h4>Pomodoro Clock</h4>
+				<img class="img-fluid" src="https://lh4.ggpht.com/eaKKhSXDW7JHsMhJnW4UOxl6V_AifpnPTgHjtW6LmJGC5edHW4jPfJBuujzknTCoQA=w300">
 				
 			    <div class="input-group form-group">	
 			    	<span class="input-group-btn">
-				    	<button class="btn btn-secondary" type="button">-</button>
+				    	<button id="btn-minus-break" class="btn btn-secondary" type="button">-</button>
 				    </span>
 				    <input type="text" id="break" class="form-control" value="5">
 				    <span class="input-group-btn">
-				    	<button class="btn btn-secondary" type="button">+</button>
+				    	<button id="btn-plus-break" class="btn btn-secondary" type="button">+</button>
 				    </span>
 				</div>
 				
 				<div class="input-group form-group">
 			    	<span class="input-group-btn">
-				    	<button class="btn btn-secondary" type="button">-</button>
+				    	<button id="btn-minus-pomodoro" class="btn btn-secondary" type="button">-</button>
 				    </span>
-				    <input type="text" class="form-control" value="25">
+				    <input id="pomodoro" type="text" class="form-control" value="20">
 				    <span class="input-group-btn">
-				    	<button class="btn btn-secondary" type="button">+</button>
+				    	<button id="btn-plus-pomodoro" class="btn btn-secondary" type="button">+</button>
 				    </span>
 				</div>
-				<button type="button" class="btn btn-block btn-success">Start</button>
+				<button id="start" type="button" class="btn btn-block btn-success">Start</button>
 			</div>
 
 				
 			
-			<div class="col-8">
+			<div class="d-block mx-auto">
 				
 				<p id="demo"></p>
 			</div>
@@ -83,28 +95,88 @@
 
 	<script>
 
-	var pomodoro = new Date("Jan 1, 2018 00:00:10");
+	var inicialDate = "Jan 1, 2018 00:00:00";
+	var pattern = "Jan 1, 2018 00:XX:00";
+	var isBreakTime = false;
+	var isPomodoroTime = true;
+
+	var idTime = 0;
+
+	var pomodoro = new Date(pattern.replace("XX",20));
 	//countDownDate.setMinutes(15);
 	//countDownDate.setSeconds(00);
 
-	// Update the count down every 1 second
-	var x = setInterval(function() {
+	function resetClock(min){
+		if(isPomodoroTime){
+			isBreakTime = false;
+			clearInterval(idTime);
+			idTime = setInterval( myTimer, 1000);
+		}
+
+		pomodoro = new Date(pattern.replace("XX",min));
+		
+	};
+
+	function myTimer() {
 
 
-	// Find the distance between now an the count down date
-  	var distance = pomodoro - new Date("Jan 1, 2018 00:00:00");
+		// Find the distance between now an the count down date
+  		var distance = pomodoro - new Date(inicialDate);
 
-	    // Output the result in an element with id="demo"
+	    
 	    document.getElementById("demo").innerHTML = pomodoro.toLocaleTimeString();
 	    
 	    pomodoro.setMilliseconds(pomodoro.getMilliseconds() - 1000);
 	    
 	    
 	    if (distance < 0) {
-		clearInterval(x);
-		document.getElementById("demo").innerHTML = "EXPIRED";
+	    	if(isBreakTime){
+
+	    		clearInterval(idTime);
+				document.getElementById("demo").innerHTML = "EXPIRED";
+				isPomodoroTime = true;
+
+	    	}else{
+	    		isBreakTime = true;
+	    		isPomodoroTime = false;
+	    		resetClock($("#break").val());
+	    		
+	    	}
+			
 	    }
-	}, 1000);
+
+	};
+
+	// Update the count down every 1 second
+	idTime = setInterval( myTimer, 1000);
+
+	$(function(){
+
+		$("#btn-plus-break").click(function(){
+			val = $("#break").val();
+			$("#break").val(Number(val) + 1);
+		});
+
+		$("#btn-minus-break").click(function(){
+			val = $("#break").val();
+			$("#break").val(Number(val) - 1);
+		});
+
+		$("#btn-plus-pomodoro").click(function(){
+			val = $("#pomodoro").val();
+			$("#pomodoro").val(Number(val) + 1);
+		});
+
+		$("#btn-minus-pomodoro").click(function(){
+			val = $("#pomodoro").val();
+			$("#pomodoro").val(Number(val) - 1);
+		});
+
+		$("#start").click(function(){
+			resetClock($("#pomodoro").val());
+		});
+
+	});
 	</script>
 
 
